@@ -4,6 +4,7 @@ from pathlib import Path
 from cryptography.hazmat.primitives import serialization
 from liblk.image import LkImage
 
+from . import resource_path
 from .cert_bypass import CertBypassMode, apply_cert_bypass
 from .keys import get_keys
 from .no_wipe import apply_no_wipe_patch
@@ -22,8 +23,12 @@ def patch_img(
     _, new_pub_key = get_keys()
     new_n_bytes = new_pub_key.public_numbers().n.to_bytes(256, byteorder='big')
 
+    xiaomi_pem = Path("xiaomi.pem")
+    if not xiaomi_pem.exists():
+        xiaomi_pem = Path(resource_path("xiaomi.pem"))
+
     try:
-        with open("xiaomi.pem", "rb") as f:
+        with xiaomi_pem.open("rb") as f:
             old_pub_key = serialization.load_pem_public_key(f.read())
     except FileNotFoundError:
         print("[-] 'xiaomi.pem' file not found.")
@@ -59,8 +64,8 @@ def patch_img(
                 f"at 0x{no_wipe_offset:X}"
             )
         except ValueError as exc:
-            print(f"[-] Failed to apply userdata wipe patch: {exc}")
-            sys.exit(1)
+            print(f"[!] Userdata wipe patch not applied: {exc}")
+            print("[!] Continuing with the public key replacement only")
 
     try:
         image = LkImage(patched_data)

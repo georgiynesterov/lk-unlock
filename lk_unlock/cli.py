@@ -27,7 +27,7 @@ def main():
 
     args = parser.parse_args()
 
-    print("[*] LK-Unlock v1.0 by @georgiynesterov")
+    print("[*] LK-Unlock v2.0 by @georgiynesterov")
 
     if args.command == "patch":
         patch_img(args.img, args.output, args.wrap, args.no_wipe_block)

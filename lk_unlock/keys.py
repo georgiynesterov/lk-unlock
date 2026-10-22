@@ -40,5 +40,5 @@ def get_keys():
             format=serialization.PublicFormat.SubjectPublicKeyInfo
         ))
 
-    print("[+] New keys have been generated and saved into private.pem и public.pem")
+    print("[+] New keys have been generated and saved into private.pem and public.pem")
     return private_key, public_key

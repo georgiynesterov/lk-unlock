@@ -112,4 +112,3 @@ This tool is for educational and research purposes only. The authors are not res
 ## License
 
 This project is licensed under the AGPL License. LK-Unlock is a free software, which is not intended for sale, commercial use, or illegal purposes.
-```

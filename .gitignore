@@ -1,3 +1,8 @@
 __pycache__/
 work/
 lk samples/
+build/
+dist/
+lk-unlock.spec
+private.pem
+public.pem
